@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.TypedValue;
 import android.widget.Button;
 import android.widget.ScrollView;
@@ -172,6 +173,8 @@ public class MainActivity extends AppCompatActivity {
             if (bel) {
                 Uri ringtone = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                 final Ringtone ringtone1 = RingtoneManager.getRingtone(context, ringtone);
+                Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(300);
                 ringtone1.play();
                 bel = false;
             }
@@ -197,9 +200,9 @@ public class MainActivity extends AppCompatActivity {
                 mapAll.get(timeNews).put(x, listNews.get(x).longValue());
             }
             if (mapAll.get(timeNews).get(x).longValue() != listNews.get(x).longValue()) {
-                String text =  (mapAll.get(timeNews).get(x).longValue() > listNews.get(x).longValue()) ? " down" : " up";
+                long t =  listNews.get(x).longValue() - mapAll.get(timeNews).get(x).longValue();
                 bel = true;
-                string.set(string + (" -> " + x + text + " point at: " + ((LocalDateTime.now().getHour() < 10) ? "0" + LocalDateTime.now().getHour() : LocalDateTime.now().getHour()) + "h" + ((LocalDateTime.now().getMinute() < 10) ? "0" + LocalDateTime.now().getMinute() : LocalDateTime.now().getMinute()) + "\n"));
+                string.set(string + (" -> " + x + ": " + t + " point at: " + ((LocalDateTime.now().getHour() < 10) ? "0" + LocalDateTime.now().getHour() : LocalDateTime.now().getHour()) + "h" + ((LocalDateTime.now().getMinute() < 10) ? "0" + LocalDateTime.now().getMinute() : LocalDateTime.now().getMinute()) + "\n"));
                 mapAll.get(timeNews).put(x, listNews.get(x).longValue());
             }
         });
