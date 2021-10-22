@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         protected String doInBackground(Void... voids) {
-            String str = "2021-06-30 00:00:00";
+            String str = "2021-12-30 00:00:00";
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
                 while (local.compareTo(dateTime.plusDays(15)) < 0) {
